@@ -1,0 +1,52 @@
+<httpk-config>
+  <default-errors-directory>/home/kmels/code/uvg/cc3008/httpk/src/main/resources/www-errors/</default-errors-directory>
+  <ports>
+    <port>9999</port>
+    <port>9998</port>
+    <port>9997</port>
+  </ports>
+  <ThreadPool number="5"/>
+  <VirtualHosts>
+    <VirtualHost name="96.45.189.225" listenOn="9999">
+      <DocumentRoot>/home/kmels/cc3008/httpk/src/main/resources/www/</DocumentRoot>
+      <Handlers>
+	<Error number="404">404.html</Error>
+	<Auth regex=".+\.htmls(.*)">users.htpasswd</Auth>
+	<Match regex="alias(.*)$">aliasmatch.html</Match>	
+      </Handlers>
+      <Options>
+	<Indexes>true</Indexes>
+	<FollowSymLinks>true</FollowSymLinks>
+      </Options>
+    </VirtualHost>
+
+    <VirtualHost name="127.0.0.1" listenOn="9998">
+      <DocumentRoot>/home/kmels/code/uvg/cc3008/httpk/src/main/resources/www2/</DocumentRoot>
+      <Handlers>
+	<Error number="404">404_2.html</Error>
+	<Match regex="^/(.*)\.alias">aliasmatch.html</Match>
+      </Handlers>
+      <Options>
+	<Indexes>false</Indexes>
+	<FollowSymLinks>false</FollowSymLinks>
+      </Options>
+    </VirtualHost>
+  </VirtualHosts>
+
+  <DistributedHosts>
+    <DistributedHost name="david" ip="96.45.189.225" port="81" priority="1"/>    
+    <DistributedHost name="karen" ip="96.45.189.225" port="82" priority="2"/>    
+    <DistributedHost name="kmels" ip="96.45.189.225" port="9999" priority="3"/>    
+    <DistributedHost name="wiikds" ip="96.45.189.225" port="8080" priority="5"/>    
+    
+    <!--testing local -->
+    <DistributedHost name="deivulocal" ip="96.45.189.225" port="81" priority="20"/>
+    <DistributedHost name="karenlocal" ip="96.45.189.225" port="82" priority="21"/>
+    <DistributedHost name="wiikdslocal" ip="96.45.189.225" port="8080" priority="22"/>
+    <DistributedHost name="kmelslocal" ip="96.45.189.225" port="8080" priority="23"/>
+
+    <DistributedHost name="jdiegod" ip="192.168.1.2" port="8002" priority="6"/>
+    <DistributedHost name="asu" ip="192.168.1.2" port="8002" priority="4"/>
+    
+    </DistributedHosts>
+</httpk-config>

@@ -1,0 +1,10 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"> 
+<html> 
+  <head> 
+    <title>Auth!</title> 
+ </head> 
+ <body> 
+   <h1>Welcome, authenticated user!</h1> 
+   <address>Httpk</address> 
+ </body>
+</html>

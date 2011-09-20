@@ -1,0 +1,14 @@
+;; This config was generated using ensime-config-gen. Feel free to customize its contents manually. 
+
+(
+
+:server-root "/home/kmels/.emacs.d/scala/ensime_2.8.0-0.2.7/"
+
+:project-package "kmels.uvg.httpk.main"
+
+:compile-jars(
+	 "/home/kmels/code/uvg/cc3008/httpk/lib_managed/"
+	 )
+:use-sbt t
+
+)

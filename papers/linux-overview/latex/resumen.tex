@@ -1,0 +1,109 @@
+\documentclass[spanish]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+
+\title{
+Resumen \\
+Investigación 1\\
+CC3008 - Sistemas Operativos Avanzados}
+\author{Carlos López Camey (08107) y Héctor Hurtarte (08119)\\
+Universidad del Valle de Guatemala}
+\date{Septiembre del 2010}
+\maketitle
+
+\begin{document}
+
+A continuación, un resumen de cada sección desarrollada, para más información,referirse al trabajo escrito.
+
+\paragraph{Generalidades del diseño. } Linux es un sistema que se concentra en la estandarización, entre los que está POSIX, que define un conjunto de especificaciones. 
+
+Compuesto de 3 partes principales:
+\textbf{Kernel:} Responsable de mantener las abstracciones imortantes del S.O. e.g. memoria virtual y procesos.
+\textbf{Bibliotecas:} Un conjunto estándar de funciones, la mayoría provienen del proyecto GNU.
+\textbf{Utilidades del sistema:} Sus programas realizan tareas individuales y especializadas.
+
+\paragraph{Características principales.}
+
+Desde la perspectiva del usuario es: 
+\begin{itemize}
+  \item multi-tarea: varios programas pueden correr al mismo tiempo
+  \item multi-usuario: varios usuarios con sesión iniciada al mismo tiempo
+  \item multi-plataforma: corre en diferentes procesadores
+  \item multi-procesador: soporte de multi-procesamiento simétrico para Intel y SPARC.
+  \item multi-hilo: soporte para múltiples hilos de control.
+\end{itemize}
+
+Desde la perspectiva del desarrollador:
+\begin{itemize}
+  \item Provee protección de memoria entre procesos
+  \item Memoria virtual 
+  \item Librerías dinámicamente compartidas y estáticas.
+\end{itemize}
+
+\paragraph{Historia.} Linus Torvalds empezó el desarrollo del kernel en 1991, luego lo puso a disposición general compartiendolo a través de internet. De ahí en adelante, el código estubo licenciado bajo una licencia libre y por lo tanto está disponible para ser bajado.
+
+La versión 0.01 del kernel fue liberada en mayo del 1991: solo corría sobre el procesador Intel 80386, con sistema de archivos Minix y manejo de memoria y procesos basado en Unix. 3 Años más tarde se añadiría soporte para protocolos de red como el TCP/IP, comunicación entre procesos.
+
+\pagebreak
+\paragraph{Manejo de procesos.} Basado en el estándar de POSIX, que define dos operaciones sobre los procesos:
+\begin{enumerate}
+  \item $fork()$: para crear un proceso
+  \item $exec()$: para ejecutar un proceso
+\end{enumerate}
+
+Un proceso puede ser creado sin ser ejecutado y un proceso puede ser ejecutado sin necesidad de crear uno nuevo antes, es decir, uno podría llamar a $exec()$ sobre un proceso cualquiera y el proceso actual dejaría de ejecutarse para ejecutar la petición.
+
+Un proceso es una entidad que abstrae toda la información que el kernel necesita para manejar su creación, ejecución, etc. Por eso define:
+\begin{itemize}
+  \item Identidad de un proceso: identidad asignada a cada proceso para referirse a él.
+  \item Ambiente de un proceso: argumentos para la ejecución del proceso.
+  \item Contexto de un proceso: información para ejecutar el proceso, como por ejemplo la prioridad de calendarización.
+\end{itemize} 
+
+\paragraph{Manejo de memoria.} Se basa en memoria virtual, por lo que el manejo de memoria se divide en:
+\begin{enumerate}
+  \item Memoria física: Dividida en tres zonas distintas (para dispositivos, para el procesoador y memoria para procesos del usuario)
+  \item Memoria virtual: Mapea las direcciones de memoria de cada proceso en ejecución a memoria real. 
+\end{enumerate}
+
+Linux utiliza el mecanismo de paginación, en donde se decide que páginas escribir en disco, según el algoritmo \textit{second chance}, que es una combinación de FIFO y un bit de referencia, que revisa si la página ha sido referenciada.
+
+\paragraph{Sistema de archivos.} Define cuatro tipos principales de objetos, abstrayendo sobre las operaciones de cada uno:
+\begin{enumerate}
+  \item Superbloque: representa un sistema de archivos completo, puede ser un sistema de archivos local o remoto.
+  \item Entrada de directorio: representa a una instancia de un directorio en un superbloque.
+  \item Nodo: representa un archivo individual en un superbloque.
+  \item Archivo: representa un archivo abierto, para acceder a él, hay que obtener su objeto nodo primero.
+\end{enumerate}
+
+Por muchos años (1992-2001), el sistema de archivos utilizado fue el \textbf{ext2fs}, que fue reemplazado por \textbf{ext3}, que está basado en ext2 y soporta $journaling$.
+
+\paragraph{Distribuciones.}
+Muchos de los componentes de una distribución de Linux no son exclusivos de Linux. En particular, Linux utiliza muchas herramientas desarrolladas como parte de BSD de Berkeley, el sistema X Window del MIT y el proyecto GNU. 
+
+Las distribuciones roporcionan un cojunto de paquetes estándar precompilados para realizar instalaciones Linux de manera sencilla.
+
+Ejemplos de distribuciones:\\
+\textbf{CentOS}: Distribución derivada de Red Hat, mantenida por una comunidad que tiene por objetivo sostener versiones 100\% compatibles con RedHat. \\\textbf{Debian}: Distribución no comercial mantenida por una comunidad de desarrollo comprometida con los principios del software libre. \\ \textbf{Fedora}: \textit{Community distribution} patrocinada por Red Hat. \\ \textbf{Edubuntu}: Derivado oficial de Ubuntu diseñado para uso en salones de clase, hogares y comunidades.\\ \textbf{KnoppMyth}: Una distribución diseñada para usarse con \textit{Home Theater PCs} (HTPCs). 
+\paragraph{Modificaciones del kernel. }
+Las modificaciones del kernel suceden rápido. De la version 2.6.20 al 2.6.25 (a\~{n}o y medio de desarrollo), \textbf{cada díaa}, en promedio 
+\begin{itemize}
+	\item 4300 l\'{i}neas añadidas 
+	\item 1800 l\'{i}neas removidas
+	\item 1500 l\'{i}neas modificadas
+\end{itemize}
+
+Existe una jerarquía de encargados que va desde desarrolladores, encargados de archivos, encargados de sub-sistemas y las personas que deciden cuando liberar una versión.
+
+\paragraph{Market share.}\\
+Computadoras personales y portatiles: Entre el 1\% y el 4\% de uso dentro de los sistemas operativos que navegaban en la web.
+
+\textit{Netbooks}: apróximadamente un tercio (~34\%) del mercado, en 2009 se estima que se habían vendido cerca de 35 millones de $netbooks$ en total. 
+
+Servidores:  En el primer cuarto del 2010, la IDC (\texit{International Data Corporation} publicó que apróximadamente el 20\% del mercado pertenecía a Linux.  Otras fuentes dicen que el verdadero porcentaje es de 40\%.
+
+Mainframes: En 2010, totalmente dominado por el Sistema z de IBM, aunque Red Hat alegaba el 18.4\% en 2007 y el 37\% en 2008.
+
+Supercomputadoras: Dominado por Linux, en un 91\%, seguido por Unix (4.40\%).
+
+\end{document}

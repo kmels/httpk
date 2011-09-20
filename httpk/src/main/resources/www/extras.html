@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
+ 
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>Httpk - Extras</title> 
+  </head> 
+ 
+  <body> 
+    <center>
+    <h2> 
+      Httpk - Extras
+    </h2></center>
+ 
+    <h3>Generales</h3>
+    <ul>
+      <li><del>Archivo de configuraci&oacute;n</del></li>
+      <li><del>Escucha en diferentes puertos customizables (diferentes instancias de servidores con un servicio)</del></li>
+      <li>Tama&ntilde;o de thread pool customizable</li>
+      <li>Lista archivos de directorios dependiendo</li> 
+      <ul>
+	<li>Sigue links simbolicos si la opcion <strong>Indexes</strong> es true, (default: false)</li>
+      </ul>
+    </ul>
+    
+    <h3>Puertos customizables</h3> 
+      <ul> 
+	<li><del>Crea un servidor con un servicio por cada virtualhost</del>, todos estos servicios comparten el mismo thread pool </li>	
+	<b>Consideremos</b>
+	<li><del>Puertos: 80,81,82</del></li>	
+	<li><del>El virtual host v1, nombre="localhost" escuchando en 80 con DocumentRoot=docroot1</del></li>
+	<li><del>El virtual host v2, nombre="127.0.0.1", escuchando en 81 con DocumentRoot=docroot2</del></li>
+	<li>Thread pool de tama&ntilde;o 5</li>
+	<b>Se crearan:</b>
+	<li><del>Un servlet con 2 servicios</del></li>
+	<li>5 threads</li>
+	<b>Funcionamiento</b>
+	<li><del>Un request a localhost:80/index.html lo atender&iacute;a v1, con el archivo situado en docroot1/index.html</del></li>
+	<li><del>Un request a 127.0.0.1:81/index.html lo atender&iacute;a v2, con el archivo situado en docroot2/index.html</del></li>
+	<li><del>Un request a localhost:81/index.html no responder&iacute;a, dar&iacute;a respuesta con estatus HTTP 422</del> </li>	
+      </ul>
+      
+      <h3>Diferentes Virtual Hosts</h3> 
+      <ul> 
+	<li><del>Atienden solo peticiones de host con su nombre</del></li>
+	<li><del>Cada uno con su cache</del></li>
+	<li><del>Cada uno con sus propios manejadores de errores</del></li> 
+	<li><del>Cada uno con sus propios manejadores de peticiones (regex handlers)</del></li>
+	<li><del>Cada uno con sus propios manejadores de peticiones que requiren autenticaci&oacute;n</del></li>	
+	<li><del>Cada uno escuchando en diferentes puertos</del></li>	
+      </ul>
+      
+       <h3>Manejador de errores/respuestas HTTP</h3> 
+       <ul> 
+	 <li><del>Especificando el c&oacute;digo de respuesta HTTP en configuraci&oacute;n</del></li> 
+	 <li><del>Especificando el path al archivo que deber&iacute;a responder en caso de producirse el error</del></li> 
+       </ul>
+
+       <h3>Manejador de peticiones (similar a AliasMatch)</h3> 
+       <ul> 
+	 <li><del>Especificando una expresi&oacute;n regular para el URI</del></li> 
+	 <li><del>Especificando el path al archivo que deber&iacute;a responder</del></li> 
+       </ul>
+       
+       <h3>Manejador para peticiones que requieren auttenticaci&oacute;n (similar a AliasMatch)</h3> 
+       <ul> 
+	 <li><del>Especificando una expresi&oacute;n regular para el URI</del></li> 
+	 <li>Especificando el path al archivo <i>htpasswd</i> que contiene los usuarios y contrase&ntilde;as.</li> 
+       </ul>
+
+       <h3>Opciones</h3> 
+       <ul> 
+	 <li>FollowSymLinks: "le hace caso" a los links s&iacute;mbolicos</li> 
+	 <li>Indexes: Listar directorios o no.</li> 
+       </ul>
+  </body> 
+</html> 
